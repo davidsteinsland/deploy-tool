@@ -31,7 +31,7 @@ GitHub will send a request similar to this:
     "statuses_url": "https:\/\/api.github.com\/repos\/:owner\/:repo\/deployments\/:id\/statuses"
   }
 }
-``
+```
 
 Your hook can then update the deployment status:
 
