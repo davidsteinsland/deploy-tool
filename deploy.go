@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -153,9 +154,17 @@ func NewCliArgs() *CliArgs {
 		}
 	}
 
+	var owner, repo string
+
+	if slug := os.Getenv("TRAVIS_REPO_SLUG"); len(slug) > 0 {
+		slugs := strings.SplitN(slug, "/", 2)
+		owner = slugs[0]
+		repo = slugs[1]
+	}
+
 	flag.StringVar(&args.Ref, "ref", ref, "The ref to deploy")
-	flag.StringVar(&args.Owner, "owner", "", "GitHub repo owner")
-	flag.StringVar(&args.Repo, "repo", "", "GitHub repo name")
+	flag.StringVar(&args.Owner, "owner", owner, "GitHub repo owner")
+	flag.StringVar(&args.Repo, "repo", repo, "GitHub repo name")
 	flag.StringVar(&args.Token, "token", os.Getenv("GITHUB_TOKEN"), "GitHub OAuth token")
 	flag.StringVar(&args.Payload, "payload", "", "A custom JSON encoded payload")
 	flag.StringVar(&args.Description, "description", "", "Description of the deploy")

@@ -37,6 +37,7 @@ Usage of ./deploy-tool:
 * You can specify `GITHUB_DEPLOYMENTS_URL` (env var) instead of both `owner` and `repo`
 * `GITHUB_TOKEN` (env var) may be used instead of `token`
 * `Ref` will be set from `TRAVIS_COMMIT` or `GIT_COMMIT` if they are available
+* `Owner` and `Repo` will be inferred from `TRAVIS_REPO_SLUG`
 
 ## Exit codes
 
