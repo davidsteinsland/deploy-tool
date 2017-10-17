@@ -36,6 +36,7 @@ Usage of ./deploy-tool:
 
 * You can specify `GITHUB_DEPLOYMENTS_URL` (env var) instead of both `owner` and `repo`
 * `GITHUB_TOKEN` (env var) may be used instead of `token`
+* `Ref` will be set from `TRAVIS_COMMIT` or `GIT_COMMIT` if they are available
 
 ## Exit codes
 
@@ -45,4 +46,4 @@ Usage of ./deploy-tool:
 - `3`: Unauthorized, OAuth token failed
 - `4`: Resource not found (404)
 - `5`: Merge conflict or Failed commit status checks
-- `6`: Unknown error
+- `10`: Unknown error

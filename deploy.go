@@ -146,7 +146,14 @@ type CliArgs struct {
 func NewCliArgs() *CliArgs {
 	args := &CliArgs{}
 
-	flag.StringVar(&args.Ref, "ref", "", "The ref to deploy")
+	var ref string
+	for _, key := range []string{"TRAVIS_COMMIT", "GIT_COMMIT"} {
+		if len(ref) == 0 {
+			ref = os.Getenv(key)
+		}
+	}
+
+	flag.StringVar(&args.Ref, "ref", ref, "The ref to deploy")
 	flag.StringVar(&args.Owner, "owner", "", "GitHub repo owner")
 	flag.StringVar(&args.Repo, "repo", "", "GitHub repo name")
 	flag.StringVar(&args.Token, "token", os.Getenv("GITHUB_TOKEN"), "GitHub OAuth token")
